@@ -12,7 +12,7 @@ var TodoList = React.createClass({
         //have to have a key property so react can keep a track
         //... spread operator - combined with destructuring - creates props for all properties of todo
         return (
-          <Todo key={todo.id} {...todo} />
+          <Todo key={todo.id} {...todo} onToggle={this.props.onToggle} />
         );
       } );
     };
