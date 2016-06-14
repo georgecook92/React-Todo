@@ -7,6 +7,13 @@ var TodoList = React.createClass({
     var {todos} = this.props;
 
     var renderTodos = () => {
+
+      if (todos.length === 0) {
+        return (
+          <p className='container__message'>Nothing to do.</p>
+        );
+      }
+
       //function gets called for each item in
       return todos.map( (todo) => {
         //have to have a key property so react can keep a track
