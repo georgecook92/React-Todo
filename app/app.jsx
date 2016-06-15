@@ -1,5 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
+var {Provider} = require('react-redux');
 //destructuring syntax - same as - var Route = require('react-router').Route and so on
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
@@ -23,7 +25,9 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  //router component
-  <TodoApp />,
+  //means that all of the app can access the redux store
+  <Provider store={store}>
+    <TodoApp />
+  </Provider>,
   document.getElementById('app')
 );

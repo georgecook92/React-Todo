@@ -49,6 +49,8 @@ export var todosReducer = (state_todos = [], action) => {
                 completed: nextCompleted,
                 completedAt: nextCompleted ? moment().unix() : undefined
             };
+          } else {
+            return todo;
           }
         } );
 

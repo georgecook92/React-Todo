@@ -22,6 +22,7 @@ export var toggleShowCompleted = () => {
 
 //toggleTodo(id) type, id
 export var toggleTodo = (id) => {
+  //debugger;
   return {
     type: 'TOGGLE_TODO',
     id

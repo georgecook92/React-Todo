@@ -1,7 +1,9 @@
 var React = require('react');
-var Todo = require('Todo');
+var {connect} = require('react-redux');
+//connected version - default - if it was {Todo} it would be the plain react version
+import Todo from 'Todo';
 
-var TodoList = React.createClass({
+export var TodoList = React.createClass({
 
   render: function() {
     var {todos} = this.props;
@@ -16,10 +18,8 @@ var TodoList = React.createClass({
 
       //function gets called for each item in
       return todos.map( (todo) => {
-        //have to have a key property so react can keep a track
-        //... spread operator - combined with destructuring - creates props for all properties of todo
         return (
-          <Todo key={todo.id} {...todo} onToggle={this.props.onToggle} />
+          <Todo key={todo.id} {...todo} />
         );
       } );
     };
@@ -34,4 +34,10 @@ var TodoList = React.createClass({
 
 });
 
-module.exports = TodoList;
+export default connect(
+  (state) => {
+    return {
+      todos: state.todos
+    };
+  }
+)(TodoList);
