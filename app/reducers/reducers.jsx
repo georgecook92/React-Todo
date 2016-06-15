@@ -1,3 +1,6 @@
+var uuid = require('node-uuid');
+var moment = require('moment');
+
 export var searchTextReducer = (state_search_text = '',action) => {
   switch (action.type) {
     case 'SET_SEARCH_TEXT':
@@ -9,9 +12,6 @@ export var searchTextReducer = (state_search_text = '',action) => {
   }
 };
 
-//reducer showCompletedReducer state = false, action
-//switch toggleShowCompleted caps
-
 export var showCompletedReducer = (state_show_completed = false, action) => {
   switch (action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
@@ -22,4 +22,37 @@ export var showCompletedReducer = (state_show_completed = false, action) => {
       return state_show_completed;
   }
 
+};
+
+export var todosReducer = (state_todos = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state_todos,
+        {
+          id: uuid(),
+          text: action.text,
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
+      ];
+
+      //toggle_todo - match id in array - completed = !completed - update completed at
+
+      case 'TOGGLE_TODO':
+        return state_todos.map( (todo) => {
+          if (todo.id === action.id) {
+            var nextCompleted = !todo.completed;
+            return {
+                ...todo,
+                completed: nextCompleted,
+                completedAt: nextCompleted ? moment().unix() : undefined
+            };
+          }
+        } );
+
+    default:
+      return state_todos;
+  }
 };
