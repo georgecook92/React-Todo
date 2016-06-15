@@ -3,10 +3,12 @@ var {connect} = require('react-redux');
 //connected version - default - if it was {Todo} it would be the plain react version
 import Todo from 'Todo';
 
+var TodoAPI = require('TodoAPI');
+
 export var TodoList = React.createClass({
 
   render: function() {
-    var {todos} = this.props;
+    var {todos, showCompleted, searchText} = this.props;
 
     var renderTodos = () => {
 
@@ -17,7 +19,8 @@ export var TodoList = React.createClass({
       }
 
       //function gets called for each item in
-      return todos.map( (todo) => {
+      //only render specified ones
+      return TodoAPI.filterTodos(todos, showCompleted, searchText).map( (todo) => {
         return (
           <Todo key={todo.id} {...todo} />
         );
@@ -36,8 +39,6 @@ export var TodoList = React.createClass({
 
 export default connect(
   (state) => {
-    return {
-      todos: state.todos
-    };
+    return state;
   }
 )(TodoList);
