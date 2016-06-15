@@ -9,7 +9,7 @@ describe('actions', () => {
       searchText: 'text'
     };
 
-    var response = actions.setSearchtext('text');
+    var response = actions.setSearchText('text');
 
     expect(response).toEqual(action);
 
