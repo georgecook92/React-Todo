@@ -12,6 +12,13 @@ export var addTodo = (text) => {
   }
 };
 
+export var addTodos = (todos) => {
+  return {
+    type: 'ADD_TODOS',
+    todos
+  }
+};
+
 //toggle show completed() TOGGLE_SHOW_COMPLETED
 
 export var toggleShowCompleted = () => {
