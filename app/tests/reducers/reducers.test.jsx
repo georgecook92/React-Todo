@@ -38,7 +38,7 @@ describe('REDUCERS', () => {
           text: 'something todo',
           completed: false,
           createdAt: 342645745,
-          
+
         }
       }
       var response = reducers.todosReducer(df([]), df(action));
@@ -46,7 +46,7 @@ describe('REDUCERS', () => {
       expect(response[0]).toEqual(action.todo);
     });
 
-    it('should toggle todo item', () => {
+    it('should update todo item', () => {
       var todos = [{
         id: '1',
         text: 'text',
@@ -54,13 +54,23 @@ describe('REDUCERS', () => {
         createdAt: 123,
         completedAt: 125
       }];
+
+      var updates = {
+        completed: false,
+        completedAt: null
+      }
+
       var action = {
-        type: 'TOGGLE_TODO',
-        id: '1'
+        type: 'UPDATE_TODO',
+        id: todos[0].id,
+        updates
       };
       var response = reducers.todosReducer( df(todos) , df(action) );
-      expect(response[0].completed).toEqual(false);
-      expect(response[0].completedAt).toEqual(undefined);
+
+      expect(response[0].completed).toEqual(updates.completed);
+      expect(response[0].completedAt).toEqual(updates.completedAt);
+      //checks you don't lose any values by using the spread operator in the updateTodo case in reducer
+      expect(response[0].text).toEqual(todos[0].text);
     });
 
     it('should add existing todos' , () => {
