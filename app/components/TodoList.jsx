@@ -1,8 +1,6 @@
 var React = require('react');
 var {connect} = require('react-redux');
-//connected version - default - if it was {Todo} it would be the plain react version
 import Todo from 'Todo';
-
 var TodoAPI = require('TodoAPI');
 
 export var TodoList = React.createClass({
@@ -12,7 +10,8 @@ export var TodoList = React.createClass({
 
     var renderTodos = () => {
 
-      if (todos.length === 0) {
+      var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+      if (filteredTodos.length === 0) {
         return (
           <p className='container__message'>Nothing to do.</p>
         );
@@ -20,7 +19,7 @@ export var TodoList = React.createClass({
 
       //function gets called for each item in
       //only render specified ones
-      return TodoAPI.filterTodos(todos, showCompleted, searchText).map( (todo) => {
+      return filteredTodos.map( (todo) => {
         return (
           <Todo key={todo.id} {...todo} />
         );
