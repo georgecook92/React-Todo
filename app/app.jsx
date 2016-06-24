@@ -3,15 +3,22 @@ var ReactDOM = require('react-dom');
 
 var {Provider} = require('react-redux');
 //destructuring syntax - same as - var Route = require('react-router').Route and so on
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
-//connected version
-import TodoApp from 'TodoApp';
+var {hashHistory} = require('react-router');
+
 
 var actions = require('actions');
 var store = require('configureStore').configure();
-var TodoAPI = require('TodoAPI');
+import firebase from 'app/firebase/';
 
-import Login from 'Login';
+import router from 'app/router/';
+
+firebase.auth().onAuthStateChanged( (user) => {
+  if (user) {
+    hashHistory.push('/todos');
+  } else {
+    hashHistory.push('/');
+  }
+} );
 
 store.dispatch( actions.startAddTodos() );
 
@@ -24,14 +31,7 @@ require('style!css!sass!applicationStyles');
 ReactDOM.render(
   //means that all of the app can access the redux store
   <Provider store={store}>
-
-    <Router history={hashHistory}>
-      <Route path="/" >
-        <Route path="todos" component={TodoApp} />
-        <IndexRoute component={Login} />
-      </Route>
-    </Router>
-
+    {router}
   </Provider>,
   document.getElementById('app')
 );
