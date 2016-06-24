@@ -3,10 +3,10 @@ import firebase from 'firebase';
 try {
   // Initialize Firebase
   var config = {
-   apiKey: "AIzaSyAdQLs71IQej2DTKn7XIsV8XRrA60aRbIE",
-   authDomain: "cook-todo-app.firebaseapp.com",
-   databaseURL: "https://cook-todo-app.firebaseio.com",
-   storageBucket: "cook-todo-app.appspot.com",
+   apiKey: process.env.API_KEY,
+   authDomain: process.env.AUTH_DOMAIN,
+   databaseURL: process.env.DATABASE_URL,
+   storageBucket: process.env.STORAGE_BUCKET,
   };
 
   firebase.initializeApp(config);
