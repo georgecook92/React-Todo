@@ -1,4 +1,4 @@
-import firebase, {firebaseRef, githubProvider} from 'app/firebase/';
+import firebase, {firebaseRef, githubProvider, facebookProvider, twitterProvider} from 'app/firebase/';
 import moment from 'moment';
 
 
@@ -106,13 +106,33 @@ export var startToggleTodo = (id, completed) => {
 };
 
 //async firebase
-export var startLogin = () => {
+export var startLoginGithub = () => {
   return (dispatch, getState) => {
-    return firebase.auth().signInWithPopup(githubProvider).then( (result) => {
-      console.log('auth worked', result);
-    }, (error) => {
-      console.log('unable to auth', error);
-    } );
+      return firebase.auth().signInWithPopup(githubProvider).then( (result) => {
+        console.log('auth worked', result);
+      }, (error) => {
+        console.log('unable to auth', error);
+      } );
+  };
+};
+
+export var startLoginFacebook = () => {
+  return (dispatch, getState) => {
+      return firebase.auth().signInWithPopup(facebookProvider).then( (result) => {
+        console.log('auth worked', result);
+      }, (error) => {
+        console.log('unable to auth', error);
+      } );
+  };
+};
+
+export var startLoginTwitter = () => {
+  return (dispatch, getState) => {
+      return firebase.auth().signInWithPopup(twitterProvider).then( (result) => {
+        console.log('auth worked', result);
+      }, (error) => {
+        console.log('unable to auth', error);
+      } );
   };
 };
 

@@ -4,10 +4,24 @@ import * as actions from 'actions';
 
 export var Login = React.createClass({
 
-  onLogin() {
+  onLoginGithub() {
     var {dispatch} = this.props;
-    dispatch(actions.startLogin());
+    dispatch(actions.startLoginGithub());
   },
+
+  onLoginFacebook() {
+    var {dispatch} = this.props;
+    dispatch(actions.startLoginFacebook());
+  },
+
+  onLoginTwitter() {
+    var {dispatch} = this.props;
+    dispatch(actions.startLoginTwitter());
+  },
+
+
+
+
 
   render() {
     return (
@@ -22,7 +36,9 @@ export var Login = React.createClass({
                 Login with github account below.
               </p>
 
-              <button className='button' onClick={this.onLogin} >Login With Github</button>
+              <button className='button' onClick={ this.onLoginGithub } >Login With Github</button>
+              <button className='button' onClick={this.onLoginFacebook} >Login With Facebook</button>
+              <button className='button' onClick={this.onLoginTwitter} >Login With Twitter</button>
             </div>
           </div>
         </div>
