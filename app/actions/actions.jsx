@@ -52,7 +52,6 @@ export var startAddTodos = () => {
     var uid = getState().auth.uid;
 
     var todosRef = firebaseRef.child(`users/${uid}/todos`);
-    debugger;
 
     return todosRef.once('value').then( (snapshot) => {
       var todos = snapshot.val() || {};
