@@ -67,7 +67,9 @@ export var startAddTodos = () => {
 
       dispatch(addTodos(parsedTodos));
 
-    });
+    }, (e) => {
+        console.log('error', e);
+    })
   };
 };
 
